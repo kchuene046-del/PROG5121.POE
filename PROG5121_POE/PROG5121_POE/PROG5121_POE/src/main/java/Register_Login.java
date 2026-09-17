@@ -118,6 +118,25 @@ public class Register_Login {
             return false;
      }
     
+     //Login methods
+     
+    public static boolean loginUser(String userName, String password, String registeredUsername, String registeredPassword)  {
+       //login in the user
+       if(userName.equals(registeredUsername) && password.equals(registeredPassword))
+       {
+           return true;
+       }
+       return false;
+    }
     
-}
+   public static String LoginSatus(String firstName, String lastName, String userName, 
+            String password,String registeredUsername, String registeredPassword) {
+        // checks if the useer is successfuly logged in
+       if (loginUser(userName, password,registeredUsername, registeredPassword))  {
+          return "Welcome " + firstName + "," + lastName + " it is great to see you again." ;
+       }
+       return "Username or password incorrect please try again";
+    }
+} 
+
    
