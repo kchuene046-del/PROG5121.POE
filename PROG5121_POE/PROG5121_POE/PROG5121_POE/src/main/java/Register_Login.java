@@ -40,6 +40,37 @@ public class Register_Login {
          }
          return false;
     }
+      public static boolean checkPasswordComplexity(String password){
+         //Declarations
+          boolean hasCapitalLetter = false;
+          boolean hasSpecialCharacter = false;
+          boolean hasNumber = false;
+          boolean hasEightCharacters = false;
+          
+          //check password length
+         if (password != null && password.length()>=8){
+             hasEightCharacters = true;
+         }
+         
+       //Checks if password has uppercases, digits and special characters
+        for (int i = 0; i < password.length(); i++) {
+            char current = password.charAt(i);
+            
+            if (Character.isUpperCase(current)) {
+                hasCapitalLetter = true;
+            } else if (Character.isDigit(current)) {
+                hasNumber = true;
+            } else if (!Character.isLetterOrDigit(current)) {
+                hasSpecialCharacter = true;
+            }
+        }
+             
+         if (hasEightCharacters && hasNumber && hasCapitalLetter && hasSpecialCharacter)
+         {
+             return true;
+         }
+            return false;
+     }
     
     
 }
