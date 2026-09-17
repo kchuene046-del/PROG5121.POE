@@ -1,18 +1,18 @@
-
-import java.util.Scanner;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
+package com.mycompany.prog5121_poe;
+
+import java.util.Scanner;
 
 /**
  *
  * @author Kgomotso
  */
-public class Register_Login {
-    
-     public static void main(String[] args) {
+public class PROG5121_POE {
+
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String firstName;
         String lastName;
@@ -113,8 +113,6 @@ public class Register_Login {
          System.out.println(LoginSatus(firstName,lastName, userName, password,registerUserName, registerPassword));
        
     }
-    
-    
     //Registration methods
       public static String registerUser(String firstName, String lastName,
         String phoneNumber, String userName,String password)  {
@@ -163,7 +161,7 @@ public class Register_Login {
           
     }
     
-    public static boolean checkFirstName(String firstName){
+     public static boolean checkFirstName(String firstName){
         
         //check if both first and last name are provided
         if (!firstName.isEmpty())
@@ -184,23 +182,16 @@ public class Register_Login {
        
             return false;
     }
-     
-     public static boolean checkCellPhoneNumber(String phoneNumber) {
-         //checks if cell phone number contains national code
-         if (phoneNumber != null && phoneNumber.matches("\\+27[0-9]{9}"))
-         {
-             return true;
-        }
-               return false;
-     }
-      public static boolean checkUserName(String userName) {
+   
+     public static boolean checkUserName(String userName) {
          //checks if the user name has an underscore or is less than 5 characters 
          if(userName != null && userName.contains("_") && userName.length()<= 5)  {
             return true;
          }
          return false;
     }
-      public static boolean checkPasswordComplexity(String password){
+     
+     public static boolean checkPasswordComplexity(String password){
          //Declarations
           boolean hasCapitalLetter = false;
           boolean hasSpecialCharacter = false;
@@ -231,7 +222,16 @@ public class Register_Login {
          }
             return false;
      }
-    
+     
+       public static boolean checkCellPhoneNumber(String phoneNumber) {
+         //checks if cell phone number contains national code
+         if (phoneNumber != null && phoneNumber.matches("\\+27[0-9]{9}"))
+         {
+             return true;
+        }
+               return false;
+     }
+     
      //Login methods
      
     public static boolean loginUser(String userName, String password, String registeredUsername, String registeredPassword)  {
@@ -251,6 +251,6 @@ public class Register_Login {
        }
        return "Username or password incorrect please try again";
     }
-} 
+}
+     
 
-   
