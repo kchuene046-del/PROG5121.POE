@@ -14,6 +14,18 @@ public class PROG5121_POE {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        String messageHash;
+        
+        //Creating an object of Message class
+        Message messageObj = new Message("10001",0,"Mzura","Hey can you come over?");
+        
+       //10:0:HeyOver?
+       
+       messageHash = messageObj.createMessageHash("10001", 0,"Hey can you come over?");
+       
+       System.out.println(messageHash);
+        
+        /*
         String firstName;
         String lastName;
         String userName;
@@ -110,7 +122,105 @@ public class PROG5121_POE {
          }
          
          System.out.println();
-         System.out.println(LoginSatus(firstName,lastName, userName, password,registerUserName, registerPassword));
+        
+        
+        String firstName;
+        String lastName;
+        String userName;
+        String phoneNumber;
+        String password;
+        String registerUserName;
+        String registerPassword;
+        
+        System.out.println();
+        System.out.println("REGISTRATION");
+        // Ask for first name
+        System.out.print("Enter your first name: ");
+        firstName = input.nextLine();
+        
+        // Ask for last name
+        System.out.print("Enter your last name: ");
+        lastName = input.nextLine();
+        
+        // Ask for phone number
+         System.out.print("Enter your phone number: ");
+         phoneNumber = input.nextLine();
+          
+         while(!checkCellPhoneNumber(phoneNumber))
+         {
+             System.out.println();
+             System.out.println("Cell phone number incorrectly formatted or does not contain international code");
+             System.out.println();
+             System.out.print("Enter your phone number: ");
+             phoneNumber = input.nextLine();
+         }
+         
+          // Ask for user name
+         System.out.print("Enter your user name: ");
+         registerUserName = input.nextLine();
+         
+           while(!checkUserName(registerUserName))
+         {
+             System.out.println();
+             System.out.println("Username is not correctly formatted, please ensure that your username contains "
+                           + "and underscore and is no more than 5 characters in length");
+             System.out.println();
+             System.out.print("Enter your user name: ");
+            registerUserName = input.nextLine();
+         }
+         
+        
+         // Ask for password
+        System.out.print("Enter your password: ");
+        registerPassword = input.nextLine();
+        System.out.println();
+        System.out.println();
+        
+        while(!checkPasswordComplexity(registerPassword))
+         {
+             System.out.println();
+             System.out.println("\nPasword is not correctly formatted, please ensure that your password contains "
+                           + "at least 8 characters, a capital letter, a number, and a special character");
+             System.out.println();
+             System.out.print("Enter your password: ");
+             registerPassword = input.nextLine();
+         }
+       System.out.println(registerUser(firstName,lastName,phoneNumber,registerUserName,registerPassword));
+       
+       System.out.println();
+       System.out.println();
+       
+       System.out.println("LOGIN");
+        // Ask for user name
+         System.out.print("Enter your user name: ");
+         userName = input.nextLine();
+         
+          while(!checkUserName(userName))
+         {
+             System.out.println();
+             System.out.println("Username is not correctly formatted, please ensure that your username contains "
+                           + "and underscore and is no more than 5 characters in length");
+             System.out.println();
+             System.out.print("Enter your user name: ");
+            userName = input.nextLine();
+         }
+        
+         // Ask for password
+         System.out.print("Enter your password: ");
+         password = input.nextLine();
+         
+         while(!checkPasswordComplexity(password))
+         {
+             System.out.println();
+             System.out.println("\nPasword is not correctly formatted, please ensure that your password contains "
+                           + "at least 8 characters, a capital letter, a number, and a special character");
+             System.out.println();
+             System.out.print("Enter your password: ");
+             password = input.nextLine();
+         }
+         
+         System.out.println();
+         System.out.println(LoginSatus(firstName,lastName, userName, password,registerUserName, registerPassword));*/
        
     }
     //Registration methods
