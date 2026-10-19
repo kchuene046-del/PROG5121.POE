@@ -182,6 +182,49 @@ public class Message {
         return retrievedMessages;
     }
    
+    public int returnTotalMessages(ArrayList<Message> MessagesSent)
+    {
+        return MessagesSent.size();
+    }
+    
+    public void StoreMessages(ArrayList<Message> MessagesList)
+    {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        
+        try(FileWriter writer = new FileWriter("message.json"))
+        {
+            gson.toJson(MessagesList,writer);
+            System.out.println("Messages saved successfully!");
+        }
+        catch(IOException e)
+        {
+            System.out.println("Error saving Messages: "+e.getMessage());
+        }
+    }
    
+     public static String generateMessageID()
+    {
+        Random random = new Random();
+        String id = "";
+        for (int i = 0; i < 10; i++)
+        {
+            id += random.nextInt(10);
+        }
+        return id;
+    }
+    
+     public String checkMessageLength(String message)
+    {
+        if (message.length() <= 250)
+        {
+            return "Message ready to send.";
+        }
+        return "Message exceeds 250 characters by " + (message.length() - 250) + "; please reduce the size.";
+    }
+    
+      public String messageIDCreated()
+    {
+        return "Message ID generated: " + this.messageID;
+    }
        
 }
