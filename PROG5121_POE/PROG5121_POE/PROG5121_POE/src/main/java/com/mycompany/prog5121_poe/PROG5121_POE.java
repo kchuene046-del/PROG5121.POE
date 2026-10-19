@@ -219,7 +219,68 @@ public class PROG5121_POE {
                      System.out.println("1. Send Message\n2. Disregard Message\n3. Store Message");
                      int userChoice = getNumber(input);
                      
-                     
+                      while (userChoice < 1 || userChoice > 3)
+                     {
+                         System.out.println(newMessage.SentMessage(userChoice));
+                         userChoice = getNumber(input);
+                     }
+                     System.out.println(newMessage.SentMessage(userChoice));
+
+                     if (userChoice == 1)
+                     {
+                         // Send: add it to the sent list and show its full details
+                         sentMessages.add(newMessage);
+                         System.out.println();
+                         newMessage.DisplayMesage();
+                     }
+                     else if (userChoice == 2)
+                     {
+                         // Disregard: the user must press 0 to delete the message
+                         String key = input.nextLine();
+                         while (!key.equals("0"))
+                         {
+                             System.out.println("Press 0 to delete the message.");
+                             key = input.nextLine();
+                         }
+                         System.out.println("Message deleted.");
+                     }
+                     else
+                     {
+                         // Store: add it to the stored list and save the list to the JSON file
+                         storedMessages.add(newMessage);
+                         newMessage.StoreMessages(storedMessages);
+                     }
+
+                     messageCount++;
+
+                     // Once all the messages have been entered, show the total sent
+                     if (messageCount == numberOfMessages)
+                     {
+                         System.out.println();
+                         System.out.println("All messages have been entered.");
+                         System.out.println("Total number of messages sent: " + messageObj.returnTotalMessages(sentMessages));
+                     }
+                     break;
+                 }
+                 
+                  case 2:
+                     System.out.println("Coming Soon.");
+                     break;
+
+                 case 3:
+                     System.out.println("Total number of messages sent: " + messageObj.returnTotalMessages(sentMessages));
+                     System.out.println("Goodbye.");
+                     break;
+
+                 default:
+                     System.out.println("Invalid option, please choose 1, 2 or 3.");
+                     break;
+             }
+         }
+         input.close();
+         
+        }  
+    }
        public static boolean checkCellPhoneNumber(String phoneNumber) {
          //checks if cell phone number contains national code
          if (phoneNumber != null && phoneNumber.matches("\\+27[0-9]{9}"))
