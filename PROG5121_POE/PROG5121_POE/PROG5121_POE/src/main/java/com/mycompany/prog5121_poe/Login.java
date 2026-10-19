@@ -58,5 +58,89 @@ public class Login {
 
     }
       
-     
+      public static boolean checkFirstName(String firstName){
+
+        //check if both first and last name are provided
+        if (!firstName.isEmpty())
+        {
+            return true;
+        }
+
+            return false;
+    }
+       public static boolean checkLastName(String lastName){
+
+        //check if both first and last name are provided
+        if (!lastName.isEmpty())
+        {
+            return true;
+        }
+
+            return false;
+    }
+     public static boolean checkUserName(String userName) {
+         //checks if the user name has an underscore or is less than 5 characters
+         if(userName != null && userName.contains("_") && userName.length()<= 5)  {
+            return true;
+         }
+         return false;
+    }
+     public static boolean checkPasswordComplexity(String password){
+         //Declarations
+          boolean hasCapitalLetter = false;
+          boolean hasSpecialCharacter = false;
+          boolean hasNumber = false;
+          boolean hasEightCharacters = false;
+
+          //check password length
+         if (password != null && password.length()>=8){
+             hasEightCharacters = true;
+         }
+
+       //Checks if password has uppercases, digits and special characters
+        for (int i = 0; i < password.length(); i++) {
+            char current = password.charAt(i);
+
+            if (Character.isUpperCase(current)) {
+                hasCapitalLetter = true;
+            } else if (Character.isDigit(current)) {
+                hasNumber = true;
+            } else if (!Character.isLetterOrDigit(current)) {
+                hasSpecialCharacter = true;
+            }
+        }
+
+         if (hasEightCharacters && hasNumber && hasCapitalLetter && hasSpecialCharacter)
+         {
+             return true;
+         }
+            return false;
+     }
+     public static boolean checkCellPhoneNumber(String phoneNumber) {
+         //checks if cell phone number contains national code
+         if (phoneNumber != null && phoneNumber.matches("\\+27[0-9]{9}"))
+         {
+             return true;
+        }
+               return false;
+     }
+      //Login methods
+
+    public static boolean loginUser(String userName, String password, String registeredUsername, String registeredPassword)  {
+       //login in the user
+       if(userName.equals(registeredUsername) && password.equals(registeredPassword))
+       {
+           return true;
+       }
+       return false;
+    }
+
+   public static String LoginStatus(String firstName, String lastName, String userName,
+            String password,String registeredUsername, String registeredPassword) {
+        // checks if the useer is successfuly logged in
+       if (loginUser(userName, password,registeredUsername, registeredPassword))  {
+          return "Welcome " + firstName + "," + lastName + " it is great to see you again." ;
+       }
+       return "Username or password incorrect please try again";
+    }
 }
