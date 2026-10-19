@@ -290,24 +290,30 @@ public class PROG5121_POE {
                return false;
      }
      
-     //Login methods
-     
-    public static boolean loginUser(String userName, String password, String registeredUsername, String registeredPassword)  {
-       //login in the user
-       if(userName.equals(registeredUsername) && password.equals(registeredPassword))
-       {
-           return true;
-       }
-       return false;
+     //Shows the QuickChat menu and returns the option the user chose
+    public static int Menu(Scanner input)
+    {
+        System.out.println();
+        System.out.println("Please choose an option:");
+        System.out.println("1) Send Messages");
+        System.out.println("2) Show recently sent messages");
+        System.out.println("3) Quit");
+        System.out.print("Option: ");
+
+        return getNumber(input);
     }
-    
-   public static String LoginSatus(String firstName, String lastName, String userName, 
-            String password,String registeredUsername, String registeredPassword) {
-        // checks if the useer is successfuly logged in
-       if (loginUser(userName, password,registeredUsername, registeredPassword))  {
-          return "Welcome " + firstName + "," + lastName + " it is great to see you again." ;
-       }
-       return "Username or password incorrect please try again";
+
+    //Reads a whole number from the user and keeps asking until they type a number
+    public static int getNumber(Scanner input)
+    {
+        while (!input.hasNextInt())
+        {
+            input.nextLine();   // throws away what they typed
+            System.out.print("Please enter a number: ");
+        }
+        int number = input.nextInt();
+        input.nextLine();   // clears the leftover Enter so the next nextLine() works
+        return number;
     }
 }
      
