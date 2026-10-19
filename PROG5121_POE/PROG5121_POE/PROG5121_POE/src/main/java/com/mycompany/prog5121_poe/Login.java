@@ -10,4 +10,8 @@ package com.mycompany.prog5121_poe;
  */
 public class Login {
     
+    //Registration methods
+      public static String registerUser(String firstName, String lastName,
+        String phoneNumber, String userName,String password)  {
+
 }
