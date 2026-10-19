@@ -5,7 +5,11 @@
 package com.mycompany.prog5121_poe;
 
 import java.util.ArrayList;
-import
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
 
 /**
  *
@@ -94,14 +98,17 @@ public class Message {
             return false;
         }
     }
-    public boolean checkRecipientCell(String recipientCell)
-    {
-        if (recipientCell.length() <= 10 && recipientCell.matches("\\+27[0-9]{9}"))
-         {
-             return true;
+    
+     public String checkRecipientCell(String recipientCell)
+     {
+        //Re-using the checkCellPhoneNumber in class login
+        if (Login.checkCellPhoneNumber(recipientCell)== true)
+        {
+            return "Cell phone number successfully captured.";
         }
-               return false;
-    }
+        return "Cell phone number is incorrectly formatted or does not contain an international code. "
+                + "Please correct the number and try again.";
+     }
     
     public void DisplayMesage()
     {
@@ -126,21 +133,55 @@ public class Message {
         messageHash += ":";
         messageHash += numMessageSent;
         messageHash += ":";
-        String[] messageArray = message.trim().split("\\s+");
-       
         
-       // Adding the first and last words of the message
-       messageHash += messageArray[0];
-       messageHash += messageArray[messageArray.length-1];
-       
-       return messageHash;
+        //Splitting the message into words wherever there are spaces
+        String[] messageArray = mesasage.trim().split("\\s+");
+        
+        //Getting the first and last words and removing punctuation like ? , ! .
+        String firstWord = messageArray[0].replaceAll("[^a-zA-Z0-9]", "");
+        String lastWord = messageArray[messageArray.length - 1].replaceAll("[^a-zA-Z0-9]", "");
+        
+        //Adding the first and last words of the message
+        messageHash += firstWord + lastWord;
+        
+        //Returning the hash in capital letters
+        return messageHash.toUpperCase();
     }
     
-    public String sentMessage(int option1, int option2, int option3)
+    public String SentMessage(int userInput)
     {
-       return ""; 
+        String choice = "";
+        
+        switch(userInput)
+        {
+            case 1: choice = "Message successfully sent.";
+            break;
+            
+            case 2: choice = "Press 0 to delete the message.";
+            break;
+            
+            case 3: choice = "Message successfully stored.";
+            break;
+            
+            default: choice = "Invalid option, please choose 1, 2 or 3.";
+            break;
+        }
+        return choice;
     }
     
-    
-    
+   public String printMessages(ArrayList<Message> MessagesList)
+    {
+        String retrievedMessages = "";
+        for (int i = 0; i < MessagesList.size(); i++) {
+            Message current = MessagesList.get(i);
+            retrievedMessages += "Message ID: " + current.getMessageID()
+                    + "\nMessage Hash: " + current.getMessageHash()
+                    + "\nRecipient: " + current.getRecipient()
+                    + "\nMessage: " + current.getMessage() + "\n\n";
+        }
+        return retrievedMessages;
+    }
+   
+   
+       
 }
