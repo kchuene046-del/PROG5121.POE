@@ -4,6 +4,9 @@
  */
 package com.mycompany.prog5121_poe;
 
+import java.util.ArrayList;
+import
+
 /**
  *
  * @author Kgomotso
@@ -124,7 +127,6 @@ public class Message {
         messageHash += numMessageSent;
         messageHash += ":";
         String[] messageArray = message.trim().split("\\s+");
-        
        
         
        // Adding the first and last words of the message
@@ -133,5 +135,12 @@ public class Message {
        
        return messageHash;
     }
+    
+    public String sentMessage(int option1, int option2, int option3)
+    {
+       return ""; 
+    }
+    
+    
     
 }
