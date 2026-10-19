@@ -209,8 +209,17 @@ public class PROG5121_POE {
                      }
                      System.out.println(messageObj.checkMessageLength(text));
                      
+                     // Creating the new message (the hash is created in the constructor)
+                     Message newMessage = new Message(messageID, messageCount, recipient, text);
+                     System.out.println(newMessage.messageIDCreated());
                      
-     
+                      // Ask what to do with the message
+                     System.out.println();
+                     System.out.println("Please Choose what you want to do with the message:");
+                     System.out.println("1. Send Message\n2. Disregard Message\n3. Store Message");
+                     int userChoice = getNumber(input);
+                     
+                     
        public static boolean checkCellPhoneNumber(String phoneNumber) {
          //checks if cell phone number contains national code
          if (phoneNumber != null && phoneNumber.matches("\\+27[0-9]{9}"))
