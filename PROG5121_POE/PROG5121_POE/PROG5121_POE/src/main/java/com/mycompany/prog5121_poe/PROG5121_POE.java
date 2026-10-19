@@ -157,162 +157,59 @@ public class PROG5121_POE {
 
          // The application runs until the user chooses Quit
         
-        while(!checkPasswordComplexity(registerPassword))
+        while (option != 3)
          {
-             System.out.println();
-             System.out.println("\nPasword is not correctly formatted, please ensure that your password contains "
-                           + "at least 8 characters, a capital letter, a number, and a special character");
-             System.out.println();
-             System.out.print("Enter your password: ");
-             registerPassword = input.nextLine();
-         }
-       System.out.println(registerUser(firstName,lastName,phoneNumber,registerUserName,registerPassword));
-       
-       System.out.println();
-       System.out.println();
-       
-       System.out.println("LOGIN");
-        // Ask for user name
-         System.out.print("Enter your user name: ");
-         userName = input.nextLine();
-         
-          while(!checkUserName(userName))
-         {
-             System.out.println();
-             System.out.println("Username is not correctly formatted, please ensure that your username contains "
-                           + "and underscore and is no more than 5 characters in length");
-             System.out.println();
-             System.out.print("Enter your user name: ");
-            userName = input.nextLine();
-         }
-        
-         // Ask for password
-         System.out.print("Enter your password: ");
-         password = input.nextLine();
-         
-         while(!checkPasswordComplexity(password))
-         {
-             System.out.println();
-             System.out.println("\nPasword is not correctly formatted, please ensure that your password contains "
-                           + "at least 8 characters, a capital letter, a number, and a special character");
-             System.out.println();
-             System.out.print("Enter your password: ");
-             password = input.nextLine();
-         }
-         
-         System.out.println();
-         System.out.println(LoginSatus(firstName,lastName, userName, password,registerUserName, registerPassword));*/
-       
-    }
-    //Registration methods
-      public static String registerUser(String firstName, String lastName,
-        String phoneNumber, String userName,String password)  {
-         //Registering the user
-         
-         String incorrectText ="";
-         
-          if(checkUserName(userName) && checkFirstName(firstName) && checkLastName(lastName)&&
-            checkPasswordComplexity(password) &&  checkCellPhoneNumber(phoneNumber) )
-            {
-                 return "Firstname Successfully captured"+"\nLastname Successfully captured"+"\nUsername Successfully captured"
-                         +"\nCell phone number Successfully added"+"\nPassword Successfully captured";
-           
-            }
-            else
-            {
-                
-                if (!checkFirstName(firstName))
-                {
-                    incorrectText +="\nFirstname is incorrect";
-                }
-                if (!checkLastName(lastName))
-                {
-                    incorrectText += "\nLastname is incorrect";
-                }
-                if(!checkUserName(userName))
-                {
-                    incorrectText += "\nUsername is not correctly formatted, please ensure that your username contains "
-                           + "and underscore and is no more than 5 characters in length";
-                }
-                if(!checkCellPhoneNumber(phoneNumber)) 
-                {
-                    incorrectText += "\nCell phone number incorrectly formatted or does not contain international code";
-                }
-                if (!
-                        checkPasswordComplexity(password) )
-                {
-                    incorrectText += "\nPasword is not correctly formatted, please ensure that your password contains "
-                           + "at least 8 characters, a capital letter, a number, and a special character";
-                }
-                
-                
-            }
-         
-          return incorrectText;
-          
-    }
-    
-     public static boolean checkFirstName(String firstName){
-        
-        //check if both first and last name are provided
-        if (!firstName.isEmpty())
-        {
-            return true;
-        }
-       
-            return false;
-    }
-    
-     public static boolean checkLastName(String lastName){
-        
-        //check if both first and last name are provided
-        if (!lastName.isEmpty())
-        {
-            return true;
-        }
-       
-            return false;
-    }
-   
-     public static boolean checkUserName(String userName) {
-         //checks if the user name has an underscore or is less than 5 characters 
-         if(userName != null && userName.contains("_") && userName.length()<= 5)  {
-            return true;
-         }
-         return false;
-    }
-     
-     public static boolean checkPasswordComplexity(String password){
-         //Declarations
-          boolean hasCapitalLetter = false;
-          boolean hasSpecialCharacter = false;
-          boolean hasNumber = false;
-          boolean hasEightCharacters = false;
-          
-          //check password length
-         if (password != null && password.length()>=8){
-             hasEightCharacters = true;
-         }
-         
-       //Checks if password has uppercases, digits and special characters
-        for (int i = 0; i < password.length(); i++) {
-            char current = password.charAt(i);
-            
-            if (Character.isUpperCase(current)) {
-                hasCapitalLetter = true;
-            } else if (Character.isDigit(current)) {
-                hasNumber = true;
-            } else if (!Character.isLetterOrDigit(current)) {
-                hasSpecialCharacter = true;
-            }
-        }
-             
-         if (hasEightCharacters && hasNumber && hasCapitalLetter && hasSpecialCharacter)
-         {
-             return true;
-         }
-            return false;
-     }
+             option = Menu(input);
+
+             switch(option)
+             {
+                 case 1:
+                 {
+                     // Stop if the user has already entered the number of messages they chose
+                     if (messageCount >= numberOfMessages)
+                     {
+                         System.out.println("You have already entered all " + numberOfMessages + " message(s).");
+                         break;
+                     }
+
+                     System.out.println();
+                     System.out.println("----- Message " + (messageCount + 1) + " -----");
+
+                     // Creating a random ten-digit message ID
+                     String messageID = Message.generateMessageID();
+
+                     // Ask for the recipient's cell number
+                     System.out.print("Enter the recipient's cell number: ");
+                     String recipient = input.nextLine();
+                     
+                      while (!Login.checkCellPhoneNumber(recipient))
+                     {
+                         System.out.println(messageObj.checkRecipientCell(recipient));
+                         System.out.print("Enter the recipient's cell number: ");
+                         recipient = input.nextLine();
+                     }
+                     System.out.println(messageObj.checkRecipientCell(recipient));
+
+                     // Ask for the message (no more than 250 characters)
+                     System.out.print("Enter your message: ");
+                     String text = input.nextLine();
+                     
+                      while (text.trim().isEmpty() || text.length() > 250)
+                     {
+                         if (text.trim().isEmpty())
+                         {
+                             System.out.println("The message cannot be empty.");
+                         }
+                         else
+                         {
+                             System.out.println(messageObj.checkMessageLength(text));
+                         }
+                         System.out.print("Enter your message: ");
+                         text = input.nextLine();
+                     }
+                     System.out.println(messageObj.checkMessageLength(text));
+                     
+                     
      
        public static boolean checkCellPhoneNumber(String phoneNumber) {
          //checks if cell phone number contains national code
