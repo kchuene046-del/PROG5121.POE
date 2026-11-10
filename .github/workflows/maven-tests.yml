@@ -34,4 +34,4 @@ jobs:
           cache: maven
 
       - name: Run unit tests
-        run: mvn --batch-mode -f "./project files/pom.xml" clean test
+        run: mvn --batch-mode -f "./Project Files/pom.xml" clean test
