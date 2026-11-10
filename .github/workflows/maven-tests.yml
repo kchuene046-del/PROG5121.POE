@@ -24,15 +24,14 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Java 11
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '11'
           distribution: 'temurin'
           cache: maven
 
       - name: Run unit tests
-        working-directory: ./Project Files
-        run: mvn --batch-mode clean test
+        run: mvn --batch-mode -f "./project files/pom.xml" clean test
