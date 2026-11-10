@@ -24,6 +24,7 @@ public class Message {
     private String messageHash;
     private String messageStatus;
     //Constructor
+    
     public Message(String messageID,
             int numMesageSent,
             String recipient,
@@ -33,9 +34,10 @@ public class Message {
         this.numMesageSent = numMesageSent;
         this.recipientCell = recipient;
         this.message = message;
-        this.messageHash = "";
+        this.messageHash = createMessageHash(messageID, numMesageSent, message);
         this.messageStatus = "";
     }
+
     //Accessor methods accesses this claseses propaties from other classes
     public String getMessageID()
     {
@@ -145,7 +147,8 @@ public class Message {
         messageHash += firstWord + lastWord;
         
         //Returning the hash in capital letters
-        return messageHash.toUpperCase();
+        this.messageHash = messageHash.toUpperCase();
+        return this.messageHash;
     }
     
     public String SentMessage(int userInput)
