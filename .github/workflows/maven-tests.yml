@@ -34,4 +34,5 @@ jobs:
           cache: maven
 
       - name: Run unit tests
+        working-directory: ./Project Files
         run: mvn --batch-mode clean test
