@@ -16,10 +16,12 @@ public class MessageTest {
     
    //Test data for Message 1 (from the brief)
     String recipient1 = "+27718693002";
+    String sender1 = "Kgomotso";
     String message1 = "Hi Mike, can you join us for dinner tonight?";
 
     //Test data for Message 2 (from the brief)
     String recipient2 = "08575975889";
+    String sender2 = "Pearl";
     String message2 = "Hi Keegan, did you receive the payment?";
 
     //Fixed message ID for testing the hash
@@ -30,10 +32,10 @@ public MessageTest() {
  }
 
  ///==================The message should not be more than 250 characters==================
-/*
+
     @Test
     public void checkMessageLengthSuccess() {
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
         String expected = "Message ready to send.";
         String actual = messageObj.checkMessageLength(message1);
 
@@ -48,7 +50,7 @@ public MessageTest() {
             longMessage += "a";
         }
 
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
         String expected = "Message exceeds 250 characters by 10; please reduce the size.";
         String actual = messageObj.checkMessageLength(longMessage);
 
@@ -59,7 +61,7 @@ public MessageTest() {
 
     @Test
     public void checkRecipientCellSuccess() {
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
         String expected = "Cell phone number successfully captured.";
         String actual = messageObj.checkRecipientCell(recipient1);
 
@@ -68,7 +70,7 @@ public MessageTest() {
 
     @Test
     public void checkRecipientCellFailure() {
-        Message messageObj = new Message(testID, 1, recipient2, message2);
+        Message messageObj = new Message(testID, 1, recipient2, sender2, message2);
         String expected = "Cell phone number is incorrectly formatted or does not contain an international code. "
                 + "Please correct the number and try again.";
         String actual = messageObj.checkRecipientCell(recipient2);
@@ -80,7 +82,7 @@ public MessageTest() {
 
     @Test
     public void checkMessageHashTestCase1() {
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
         String expected = "00:0:HITONIGHT";
         String actual = messageObj.createMessageHash(testID, 0, message1);
 
@@ -93,7 +95,7 @@ public MessageTest() {
         String[] messages = {message1, message2};
         String[] expectedHashes = {"00:0:HITONIGHT", "00:1:HIPAYMENT"};
 
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
 
         for (int i = 0; i < messages.length; i++) {
             String actual = messageObj.createMessageHash(testID, i, messages[i]);
@@ -106,7 +108,7 @@ public MessageTest() {
     @Test
     public void checkMessageIDCreated() {
         String messageID = Message.generateMessageID();
-        Message messageObj = new Message(messageID, 0, recipient1, message1);
+        Message messageObj = new Message(messageID, 0, recipient1, sender1, message1);
 
         String expected = "Message ID generated: " + messageID;
         String actual = messageObj.messageIDCreated();
@@ -117,14 +119,14 @@ public MessageTest() {
     @Test
     public void checkMessageIDIsValid() {
         String messageID = Message.generateMessageID();
-        Message messageObj = new Message(messageID, 0, recipient1, message1);
+        Message messageObj = new Message(messageID, 0, recipient1, sender1,  message1);
 
         assertTrue(messageObj.checkMessageID(messageID));
     }
 
     @Test
     public void checkMessageIDTooLong() {
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
 
         assertFalse(messageObj.checkMessageID("12345678901"));
     }
@@ -133,7 +135,7 @@ public MessageTest() {
 
     @Test
     public void checkSendMessage() {
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
         String expected = "Message successfully sent.";
         String actual = messageObj.SentMessage(1);
 
@@ -142,7 +144,7 @@ public MessageTest() {
 
     @Test
     public void checkDisregardMessage() {
-        Message messageObj = new Message(testID, 1, recipient2, message2);
+        Message messageObj = new Message(testID, 1, recipient2, sender2, message2);
         String expected = "Press 0 to delete the message.";
         String actual = messageObj.SentMessage(2);
 
@@ -151,7 +153,7 @@ public MessageTest() {
 
     @Test
     public void checkStoreMessage() {
-        Message messageObj = new Message(testID, 0, recipient1, message1);
+        Message messageObj = new Message(testID, 0, recipient1, sender1, message1);
         String expected = "Message successfully stored.";
         String actual = messageObj.SentMessage(3);
 
@@ -163,7 +165,7 @@ public MessageTest() {
     public void checkReturnTotalMessages() {
         //Test data: Message 1 is sent and Message 2 is discarded, so the total is 1
         ArrayList<Message> sentMessages = new ArrayList<>();
-        Message messageObj1 = new Message(testID, 0, recipient1, message1);
+        Message messageObj1 = new Message(testID, 0, recipient1, sender1, message1);
 
         sentMessages.add(messageObj1);
 
@@ -173,7 +175,7 @@ public MessageTest() {
     @Test
     public void checkPrintMessages() {
         ArrayList<Message> sentMessages = new ArrayList<>();
-        Message messageObj1 = new Message(testID, 0, recipient1, message1);
+        Message messageObj1 = new Message(testID, 0, recipient1, sender1, message1);
         sentMessages.add(messageObj1);
 
         String expected = "Message ID: 0012345678"
@@ -184,5 +186,5 @@ public MessageTest() {
 
         assertEquals(expected, actual);
     }
-*/
+
 }
