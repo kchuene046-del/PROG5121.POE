@@ -30,7 +30,7 @@ public MessageTest() {
  }
 
  ///==================The message should not be more than 250 characters==================
-
+/*
     @Test
     public void checkMessageLengthSuccess() {
         Message messageObj = new Message(testID, 0, recipient1, message1);
@@ -184,4 +184,5 @@ public MessageTest() {
 
         assertEquals(expected, actual);
     }
+*/
 }

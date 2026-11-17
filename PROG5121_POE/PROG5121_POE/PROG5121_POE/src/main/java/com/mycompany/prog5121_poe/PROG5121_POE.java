@@ -27,7 +27,7 @@ public class PROG5121_POE {
         String registerPassword;
         //Creating an object of Message class
         //(used to call the Message check methods before a new message is created)
-         messageObj = new Message("10001",0,"Kgomotso","Hey can you come over?");
+         messageObj = new Message("10001",0,"Kgomotso","Nosipho","Hey can you come over?");
 
          //Creating an object of Login
          loginObj = new Login();
@@ -219,9 +219,9 @@ public class PROG5121_POE {
 
                         // Creating the new message (the hash is created in the constructor)
                         messageCount++;
-                        Message newMessage = new Message(messageID, messageCount, recipient, text);
-                        //System.out.println(newMessage.messageIDCreated());
-                        //System.out.println(newMessage.getMessageHash());
+                        
+                        Message newMessage = new Message(messageID, messageCount, recipient, firstName, text);
+                        
 
                         // Ask what to do with the message
                         System.out.println();
@@ -229,7 +229,7 @@ public class PROG5121_POE {
                         System.out.println("1. Send Message\n2. Disregard Message\n3. Store Message");
                         int userChoice = getNumber(input);
 
-                        while (userChoice < 1 || userChoice > 3)
+                        while (userChoice < 1 || userChoice > 4)
                         {
                             System.out.println(newMessage.SentMessage(userChoice));
                             userChoice = getNumber(input);
@@ -239,6 +239,7 @@ public class PROG5121_POE {
                         if (userChoice == 1)
                         {
                             // Send: add it to the sent list and show its full details
+                            newMessage.setStatus("Sent");
                             sentMessages.add(newMessage);
                             System.out.println();
                             newMessage.DisplayMesage();
@@ -246,6 +247,7 @@ public class PROG5121_POE {
                         else if (userChoice == 2)
                         {
                             // Disregard: the user must press 0 to delete the message
+                            newMessage.setStatus("Disregard");
                             String key = input.nextLine();
                             while (!key.equals("0"))
                             {
@@ -257,6 +259,7 @@ public class PROG5121_POE {
                         else
                         {
                             // Store: add it to the stored list and save the list to the JSON file
+                            newMessage.setStatus("Stored");
                             storedMessages.add(newMessage);
                             newMessage.StoreMessages(storedMessages);
                         }

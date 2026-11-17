@@ -9,7 +9,11 @@ import java.util.ArrayList;
  * @author Kgomotso
  */
 public class MessageManagement {
-    public void displayStoredMessage (ArrayList<Message> storedMessages){
+    public void displayStoredMessage (ArrayList<Message> storedMessages, String sender){
         
+        for (int i = 0; i < storedMessages.size(); i++) {
+            Message currentMessage = storedMessages.get(i);
+            System.out.println("Sender: "+sender+"\nRecipient: "+currentMessage.getRecipient());
+        }
     }
 }

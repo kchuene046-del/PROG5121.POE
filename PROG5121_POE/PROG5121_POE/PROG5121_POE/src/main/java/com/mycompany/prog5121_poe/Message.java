@@ -20,22 +20,26 @@ public class Message {
     private String messageID;
     private int numMesageSent;
     private String recipientCell;
+    private String sender;
     private String message;
     private String messageHash;
-    private String messageStatus;
+    private String status;
     //Constructor
     
     public Message(String messageID,
             int numMesageSent,
             String recipient,
-            String message)
+            String sender,
+            String message
+            )
     {
         this.messageID = messageID;
         this.numMesageSent = numMesageSent;
         this.recipientCell = recipient;
+        this.sender = sender;
         this.message = message;
         this.messageHash = createMessageHash(messageID, numMesageSent, message);
-        this.messageStatus = "";
+        this.status = "";
     }
 
     //Accessor methods accesses this claseses propaties from other classes
@@ -61,7 +65,7 @@ public class Message {
     }
       public String getMessageStatus()
     {
-        return this.messageStatus;
+        return this.status;
     }
       
     //Mutator methods changes this cchangeslass's proparties ouside from other classes
@@ -82,9 +86,9 @@ public class Message {
       {
           this.messageHash = messageHash;
       }
-        public void setMessageStatus(String messageStatus)
+        public void setStatus(String status)
       {
-          this.messageStatus = messageStatus;
+          this.status = status;
       }
     
     
@@ -114,8 +118,8 @@ public class Message {
     
     public void DisplayMesage()
     {
-        System.out.println("Message ID: "+this.messageID+"\nMessage Hash: "+this.messageHash+"\nMessages Sent: "+this.numMesageSent+
-                "\nRecipient: "+this.recipientCell+"\nMessage: "+this.message);
+        System.out.println("Message ID: "+this.messageID +"\nMessage Hash: "+this.messageHash +"\nMessages Sent: "+this.numMesageSent+
+                "\nSender: "+this.sender +"\nRecipient: "+this.recipientCell +"\nMessage: "+this.message +"\nStatus: " +this.status);
     }
     public String createMessageHash(String messageID, int numMessageSent, String mesasage)
     {
