@@ -92,7 +92,9 @@ public class PROG5121_POE {
        System.out.println();
 
        //================Login============================
-       System.out.println("LOGIN");
+       
+       do{
+           System.out.println("LOGIN");
         // Ask for user name
          System.out.print("Enter your user name: ");
          userName = input.nextLine();
@@ -124,16 +126,20 @@ public class PROG5121_POE {
          System.out.println();
          System.out.println();
          System.out.println(Login.LoginStatus(firstName,lastName, userName, password,registerUserName, registerPassword));
+         
+          if (!Login.loginUser(userName, password, registerUserName, registerPassword))
+         {
+             System.out.println("You must log in successfully to use QuickChat. Goodbye.");
+         }
+       }
+       while(!Login.loginUser(userName, password, registerUserName, registerPassword));
+       
 
          //================QuickChat (Part 2)============================
 
          // Users can only send messages if they logged in successfully
-         if (!Login.loginUser(userName, password, registerUserName, registerPassword))
-         {
-             System.out.println("You must log in successfully to use QuickChat. Goodbye.");
-         }
-         else{
-             System.out.println();
+        
+         System.out.println();
          System.out.println();
          System.out.println("Welcome to QuickChat.");
 
@@ -150,12 +156,15 @@ public class PROG5121_POE {
          // Lists to keep the sent and stored messages
          ArrayList<Message> sentMessages = new ArrayList<>();
          ArrayList<Message> storedMessages = new ArrayList<>();
+         ArrayList<Message> disregardedMessages = new ArrayList<>();
+         ArrayList<String> messageHashArray = new ArrayList<>();
+         ArrayList<String> messageIDArray = new ArrayList<>();
 
          int messageCount = 0;   // how many messages have been entered (also the message number in the hash)
          int option = 0;
 
          // The application runs until the user chooses Quit
-         while (option != 3)
+         while (option != 4)
          {
              option = Menu(input);
 
@@ -164,120 +173,130 @@ public class PROG5121_POE {
                  case 1:
                  {
                      // Stop if the user has already entered the number of messages they chose
-                     if (messageCount >= numberOfMessages)
+                     if (messageCount == numberOfMessages)
                      {
                          System.out.println("You have already entered all " + numberOfMessages + " message(s).");
-                         break;
-                     }
-
-                     System.out.println();
-                     System.out.println("----- Message " + (messageCount + 1) + " -----");
-
-                     // Creating a random ten-digit message ID
-                     String messageID = Message.generateMessageID();
-
-                     // Ask for the recipient's cell number
-                     System.out.print("Enter the recipient's cell number: ");
-                     String recipient = input.nextLine();
-
-                     while (!Login.checkCellPhoneNumber(recipient))
-                     {
-                         System.out.println(messageObj.checkRecipientCell(recipient));
-                         System.out.print("Enter the recipient's cell number: ");
-                         recipient = input.nextLine();
-                     }
-                     System.out.println(messageObj.checkRecipientCell(recipient));
-
-                     // Ask for the message (no more than 250 characters)
-                     System.out.print("Enter your message: ");
-                     String text = input.nextLine();
-
-                     while (text.trim().isEmpty() || text.length() > 250)
-                     {
-                         if (text.trim().isEmpty())
-                         {
-                             System.out.println("The message cannot be empty.");
-                         }
-                         else
-                         {
-                             System.out.println(messageObj.checkMessageLength(text));
-                         }
-                         System.out.print("Enter your message: ");
-                         text = input.nextLine();
-                     }
-                     System.out.println(messageObj.checkMessageLength(text));
-
-                     // Creating the new message (the hash is created in the constructor)
-                     Message newMessage = new Message(messageID, messageCount, recipient, text);
-                     System.out.println(newMessage.messageIDCreated());
-
-                     // Ask what to do with the message
-                     System.out.println();
-                     System.out.println("Please Choose what you want to do with the message:");
-                     System.out.println("1. Send Message\n2. Disregard Message\n3. Store Message");
-                     int userChoice = getNumber(input);
-
-                     while (userChoice < 1 || userChoice > 3)
-                     {
-                         System.out.println(newMessage.SentMessage(userChoice));
-                         userChoice = getNumber(input);
-                     }
-                     System.out.println(newMessage.SentMessage(userChoice));
-
-                     if (userChoice == 1)
-                     {
-                         // Send: add it to the sent list and show its full details
-                         sentMessages.add(newMessage);
-                         System.out.println();
-                         newMessage.DisplayMesage();
-                     }
-                     else if (userChoice == 2)
-                     {
-                         // Disregard: the user must press 0 to delete the message
-                         String key = input.nextLine();
-                         while (!key.equals("0"))
-                         {
-                             System.out.println("Press 0 to delete the message.");
-                             key = input.nextLine();
-                         }
-                         System.out.println("Message deleted.");
+                        
                      }
                      else
                      {
-                         // Store: add it to the stored list and save the list to the JSON file
-                         storedMessages.add(newMessage);
-                         newMessage.StoreMessages(storedMessages);
-                     }
+                        System.out.println();
+                        System.out.println("----- Message " + (messageCount + 1) + " -----");
 
-                     messageCount++;
+                        // Creating a random ten-digit message ID
+                        String messageID = Message.generateMessageID();
 
-                     // Once all the messages have been entered, show the total sent
-                     if (messageCount == numberOfMessages)
-                     {
-                         System.out.println();
-                         System.out.println("All messages have been entered.");
-                         System.out.println("Total number of messages sent: " + messageObj.returnTotalMessages(sentMessages));
-                     }
+                        // Ask for the recipient's cell number
+                        System.out.print("Enter the recipient's cell number: ");
+                        String recipient = input.nextLine();
+
+                        while (!Login.checkCellPhoneNumber(recipient))
+                        {
+                            System.out.println(messageObj.checkRecipientCell(recipient));
+                            System.out.print("Enter the recipient's cell number: ");
+                            recipient = input.nextLine();
+                        }
+                        System.out.println(messageObj.checkRecipientCell(recipient));
+
+                        // Ask for the message (no more than 250 characters)
+                        System.out.print("Enter your message: ");
+                        String text = input.nextLine();
+
+                        while (text.trim().isEmpty() || text.length() > 250)
+                        {
+                            if (text.trim().isEmpty())
+                            {
+                                System.out.println("The message cannot be empty.");
+                            }
+                            else
+                            {
+                                System.out.println(messageObj.checkMessageLength(text));
+                            }
+                            System.out.print("Enter your message: ");
+                            text = input.nextLine();
+                        }
+                        System.out.println(messageObj.checkMessageLength(text));
+
+                        // Creating the new message (the hash is created in the constructor)
+                        messageCount++;
+                        Message newMessage = new Message(messageID, messageCount, recipient, text);
+                        //System.out.println(newMessage.messageIDCreated());
+                        //System.out.println(newMessage.getMessageHash());
+
+                        // Ask what to do with the message
+                        System.out.println();
+                        System.out.println("Please Choose what you want to do with the message:");
+                        System.out.println("1. Send Message\n2. Disregard Message\n3. Store Message");
+                        int userChoice = getNumber(input);
+
+                        while (userChoice < 1 || userChoice > 3)
+                        {
+                            System.out.println(newMessage.SentMessage(userChoice));
+                            userChoice = getNumber(input);
+                        }
+                        System.out.println(newMessage.SentMessage(userChoice));
+
+                        if (userChoice == 1)
+                        {
+                            // Send: add it to the sent list and show its full details
+                            sentMessages.add(newMessage);
+                            System.out.println();
+                            newMessage.DisplayMesage();
+                        }
+                        else if (userChoice == 2)
+                        {
+                            // Disregard: the user must press 0 to delete the message
+                            String key = input.nextLine();
+                            while (!key.equals("0"))
+                            {
+                                System.out.println("Press 0 to delete the message.");
+                                key = input.nextLine();
+                            }
+                            System.out.println("Message deleted.");
+                        }
+                        else
+                        {
+                            // Store: add it to the stored list and save the list to the JSON file
+                            storedMessages.add(newMessage);
+                            newMessage.StoreMessages(storedMessages);
+                        }
+
+
+
+                        // Once all the messages have been entered, show the total sent
+                        if (messageCount == numberOfMessages)
+                        {
+                            System.out.println();
+                            System.out.println("All messages have been entered.");
+                            System.out.println("Total number of messages sent: " + messageObj.returnTotalMessages(sentMessages));
+                            break;
+                        }
+                    }
+
                      break;
                  }
 
                  case 2:
                      System.out.println("Coming Soon.");
                      break;
-
+                     
                  case 3:
+                     break;
+
+                 case 4:
                      System.out.println("Total number of messages sent: " + messageObj.returnTotalMessages(sentMessages));
                      System.out.println("Goodbye.");
                      break;
 
                  default:
-                     System.out.println("Invalid option, please choose 1, 2 or 3.");
+                     System.out.println("Invalid option, please choose 1, 2,3, or 4");
                      break;
              }
+             
          }
          input.close();
          
-        }  
+          
     }
 
     //Shows the QuickChat menu and returns the option the user chose
@@ -287,7 +306,8 @@ public class PROG5121_POE {
         System.out.println("Please choose an option:");
         System.out.println("1) Send Messages");
         System.out.println("2) Show recently sent messages");
-        System.out.println("3) Quit");
+        System.out.println("3) Stored messages");
+        System.out.println("4) Quit");
         System.out.print("Option: ");
 
         return getNumber(input);
