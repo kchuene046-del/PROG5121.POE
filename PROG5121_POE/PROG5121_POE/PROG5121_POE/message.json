@@ -1,65 +1,38 @@
 [
   {
-    "messageID": "0213168952",
+    "messageID": "3172767146",
     "numMesageSent": 1,
-    "recipientCell": "+27987654321",
+    "recipientCell": "+27555555555",
     "sender": "Kgomotso",
-    "message": "Hey there i want you to be okay",
-    "messageHash": "02:1:HEYOKAY",
+    "message": "We are now testing",
+    "messageHash": "31:1:WETESTING",
     "status": "Stored"
   },
   {
-    "messageID": "9517551095",
+    "messageID": "1335588669",
     "numMesageSent": 1,
-    "recipientCell": "+27645454545",
+    "recipientCell": "+27111111111",
     "sender": "Kgomotso",
-    "message": "Hi how are you today?",
-    "messageHash": "95:1:HITODAY",
+    "message": "Of which is wrong!",
+    "messageHash": "13:1:OFWRONG",
     "status": "Stored"
   },
   {
-    "messageID": "9517551095",
-    "numMesageSent": 1,
-    "recipientCell": "+27645454545",
-    "sender": "Kgomotso",
-    "message": "Hi how are you today?",
-    "messageHash": "95:1:HITODAY",
-    "status": "Stored"
-  },
-  {
-    "messageID": "8160413480",
+    "messageID": "3573629077",
     "numMesageSent": 2,
-    "recipientCell": "+27123456789",
+    "recipientCell": "+27222222222",
     "sender": "Kgomotso",
-    "message": "I am coming",
-    "messageHash": "81:2:ICOMING",
+    "message": "Who be this!",
+    "messageHash": "35:2:WHOTHIS",
     "status": "Stored"
   },
   {
-    "messageID": "9517551095",
+    "messageID": "2574278714",
     "numMesageSent": 1,
-    "recipientCell": "+27645454545",
+    "recipientCell": "+27333333333",
     "sender": "Kgomotso",
-    "message": "Hi how are you today?",
-    "messageHash": "95:1:HITODAY",
-    "status": "Stored"
-  },
-  {
-    "messageID": "8160413480",
-    "numMesageSent": 2,
-    "recipientCell": "+27123456789",
-    "sender": "Kgomotso",
-    "message": "I am coming",
-    "messageHash": "81:2:ICOMING",
-    "status": "Stored"
-  },
-  {
-    "messageID": "9317009198",
-    "numMesageSent": 3,
-    "recipientCell": "+27123456789",
-    "sender": "Kgomotso",
-    "message": "What\u0027s for lunch today?",
-    "messageHash": "93:3:WHATSTODAY",
+    "message": "Water is gone!",
+    "messageHash": "25:1:WATERGONE",
     "status": "Stored"
   }
 ]

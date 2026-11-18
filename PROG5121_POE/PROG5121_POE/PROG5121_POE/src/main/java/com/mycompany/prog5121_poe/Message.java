@@ -205,47 +205,13 @@ public class Message {
         return MessagesSent.size();
     }
     
-   /* public void StoreMessages(ArrayList<Message> MessagesList)
-    {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        
-        try(FileWriter writer = new FileWriter("message.json"))
-        {
-            gson.toJson(MessagesList,writer);
-            System.out.println("Messages saved successfully!");
-        }
-        catch(IOException e)
-        {
-            System.out.println("Error saving Messages: "+e.getMessage());
-        }
-    }*/
-    
-    public void StoreMessages(ArrayList<Message> MessagesList)
-    {
+   
+    public void StoreMessages(ArrayList<Message> storedMessages){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        ArrayList<Message> existingMessages;
-
-        // Read existing messages from JSON file
-        try (FileReader reader = new FileReader("message.json"))
-        {
-            Type listType = new TypeToken<ArrayList<Message>>(){}.getType();
-
-            existingMessages = gson.fromJson(reader, listType);
-        }
-        catch (IOException e)
-        {
-            System.out.println("Error reading Messages: " + e.getMessage());
-            return;
-        }
-
-        // Add new messages to previously saved messages
-        existingMessages.addAll(MessagesList);
-
-        // Save all messages back to the JSON file
         try (FileWriter writer = new FileWriter("message.json"))
         {
-            gson.toJson(existingMessages, writer);
+            gson.toJson(storedMessages, writer);
 
             System.out.println("Messages saved successfully!");
         }
@@ -254,6 +220,8 @@ public class Message {
             System.out.println("Error saving Messages: " + e.getMessage());
         }
     }
+
+
    
      public static String generateMessageID()
     {
