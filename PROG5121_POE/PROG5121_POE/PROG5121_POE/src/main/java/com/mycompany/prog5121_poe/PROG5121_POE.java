@@ -3,9 +3,16 @@
  */
 
 package com.mycompany.prog5121_poe;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 /**
  *
@@ -284,6 +291,10 @@ public class PROG5121_POE {
                      break;
                      
                  case 3:
+                     loadMessages(storedMessages);
+                     MessageManagement obj = new MessageManagement();
+                     obj.displaySenderAndRecipient(storedMessages);
+                       
                      break;
 
                  case 4:
@@ -328,6 +339,36 @@ public class PROG5121_POE {
         input.nextLine();   // clears the leftover Enter so the next nextLine() works
         return number;
     }
+    
+   
+           
+    public static void loadMessages(ArrayList<Message> storedMessages)
+    {
+        Gson gson = new Gson();
+
+        try (FileReader reader = new FileReader("message.json"))
+        {
+            Type listType = new TypeToken<ArrayList<Message>>(){}.getType();
+
+            ArrayList<Message> loadedMessages = gson.fromJson(reader, listType);
+
+            if (loadedMessages != null)
+            {
+                storedMessages.clear();
+                storedMessages.addAll(loadedMessages);
+
+                System.out.println("Messages loaded successfully!");
+                System.out.println("Total messages loaded: " + storedMessages.size());
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error loading messages: " + e.getMessage());
+        }
+    }
+
+        
 }
+
      
 

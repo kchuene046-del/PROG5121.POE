@@ -1,10 +1,65 @@
 [
   {
-    "messageID": "4441899260",
-    "numMesageSent": 0,
+    "messageID": "0213168952",
+    "numMesageSent": 1,
+    "recipientCell": "+27987654321",
+    "sender": "Kgomotso",
+    "message": "Hey there i want you to be okay",
+    "messageHash": "02:1:HEYOKAY",
+    "status": "Stored"
+  },
+  {
+    "messageID": "9517551095",
+    "numMesageSent": 1,
+    "recipientCell": "+27645454545",
+    "sender": "Kgomotso",
+    "message": "Hi how are you today?",
+    "messageHash": "95:1:HITODAY",
+    "status": "Stored"
+  },
+  {
+    "messageID": "9517551095",
+    "numMesageSent": 1,
+    "recipientCell": "+27645454545",
+    "sender": "Kgomotso",
+    "message": "Hi how are you today?",
+    "messageHash": "95:1:HITODAY",
+    "status": "Stored"
+  },
+  {
+    "messageID": "8160413480",
+    "numMesageSent": 2,
     "recipientCell": "+27123456789",
-    "message": "Hey There!",
-    "messageHash": "",
-    "messageStatus": ""
+    "sender": "Kgomotso",
+    "message": "I am coming",
+    "messageHash": "81:2:ICOMING",
+    "status": "Stored"
+  },
+  {
+    "messageID": "9517551095",
+    "numMesageSent": 1,
+    "recipientCell": "+27645454545",
+    "sender": "Kgomotso",
+    "message": "Hi how are you today?",
+    "messageHash": "95:1:HITODAY",
+    "status": "Stored"
+  },
+  {
+    "messageID": "8160413480",
+    "numMesageSent": 2,
+    "recipientCell": "+27123456789",
+    "sender": "Kgomotso",
+    "message": "I am coming",
+    "messageHash": "81:2:ICOMING",
+    "status": "Stored"
+  },
+  {
+    "messageID": "9317009198",
+    "numMesageSent": 3,
+    "recipientCell": "+27123456789",
+    "sender": "Kgomotso",
+    "message": "What\u0027s for lunch today?",
+    "messageHash": "93:3:WHATSTODAY",
+    "status": "Stored"
   }
 ]

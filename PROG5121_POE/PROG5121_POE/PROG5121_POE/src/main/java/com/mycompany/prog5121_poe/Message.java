@@ -4,13 +4,15 @@
  */
 package com.mycompany.prog5121_poe;
 
+import java.util.Random;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Random;
-
+import com.google.gson.reflect.TypeToken;
 /**
  *
  * @author Kgomotso
@@ -55,6 +57,10 @@ public class Message {
     {
         return this.recipientCell;
     }
+     public String getSender()
+    {
+        return this.sender;
+    }
     public String getMessage()
     {
         return this.message;
@@ -77,6 +83,11 @@ public class Message {
       public void setRecipient(String recipient)
       {
           this.recipientCell = recipient;
+      }
+      
+       public void setSender(String sender)
+      {
+          this.sender = sender;
       }
        public void setMessage(String message)
       {
@@ -194,7 +205,7 @@ public class Message {
         return MessagesSent.size();
     }
     
-    public void StoreMessages(ArrayList<Message> MessagesList)
+   /* public void StoreMessages(ArrayList<Message> MessagesList)
     {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         
@@ -206,6 +217,41 @@ public class Message {
         catch(IOException e)
         {
             System.out.println("Error saving Messages: "+e.getMessage());
+        }
+    }*/
+    
+    public void StoreMessages(ArrayList<Message> MessagesList)
+    {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        ArrayList<Message> existingMessages;
+
+        // Read existing messages from JSON file
+        try (FileReader reader = new FileReader("message.json"))
+        {
+            Type listType = new TypeToken<ArrayList<Message>>(){}.getType();
+
+            existingMessages = gson.fromJson(reader, listType);
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error reading Messages: " + e.getMessage());
+            return;
+        }
+
+        // Add new messages to previously saved messages
+        existingMessages.addAll(MessagesList);
+
+        // Save all messages back to the JSON file
+        try (FileWriter writer = new FileWriter("message.json"))
+        {
+            gson.toJson(existingMessages, writer);
+
+            System.out.println("Messages saved successfully!");
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error saving Messages: " + e.getMessage());
         }
     }
    
