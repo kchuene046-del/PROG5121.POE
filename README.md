@@ -43,24 +43,24 @@ Technologies and Tools
 Project Structure
 The Maven project is located in:
 PROG5121_POE/
-└── PROG5121/
-    └── PROG5121_POE/
-        └── PROG5121_POE/
-            ├── pom.xml
-            ├── message.json
-            └── src/
-                ├── main/
-                │   └── java/
-                │       └── com/mycompany/prog5121_poe/
-                │           ├── PROG5121_POE.java
-                │           ├── Login.java
-                │           ├── Message.java
-                │           └── MessageManagement.java
-                └── test/
-                    └── java/
-                        ├── MessageTest.java
-                        ├── RegisterTest.java
-                        └── StoredMessagesTests.java
+── PROG5121/
+    ── PROG5121_POE/
+        ── PROG5121_POE/
+            ── pom.xml
+            ── message.json
+            ── src/
+                ── main/
+                   ── java/
+                       ── com/mycompany/prog5121_poe/
+                           ── PROG5121_POE.java
+                           ── Login.java
+                           ── Message.java
+                           ── MessageManagement.java
+                ── test/
+                    ── java/
+                        ── MessageTest.java
+                        ── RegisterTest.java
+                        ── StoredMessagesTests.java
 Main class
 Class	Responsibility
 PROG5121_POE	Runs the application, displays the menus and coordinates the registration, login and messaging process.
