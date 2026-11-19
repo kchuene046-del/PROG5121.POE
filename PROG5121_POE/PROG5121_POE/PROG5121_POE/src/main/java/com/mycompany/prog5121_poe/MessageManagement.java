@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class MessageManagement {
 
-    Scanner input = new Scanner(System.in);
+    public Scanner input = new Scanner(System.in);
 
     public void displaySenderAndRecipient(ArrayList<Message> storedMessages) {
         System.out.println("\n");
